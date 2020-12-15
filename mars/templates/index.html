@@ -1,10 +1,153 @@
-<html>
+<!doctype html>
+<style>   
+    #alerta{
+        
+        display: block;
+        margin: auto;
+        z-index: 1;
+        margin-top: 15px;
+        font-size: 12px;
+    }
+    .close{
+        font-size: 18px !important;
+    }
+    .hand {
+        display: block;
+        margin: 50px auto;
+        max-width: 350px;
+    }
+    .logos{
+        max-width: 100px;
+    }
+    #footer {
+        position: absolute;
+        bottom: 15px;    
+    }
+
+
+    @media screen and (-webkit-min-device-pixel-ratio:0) { 
+        select:focus,
+        textarea:focus,
+        input:focus {
+            font-size: 20px;
+            background: #eee;
+        }
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio:0) { 
+        select,
+        textarea,
+        input {
+            font-size: 16px;
+        }
+    }
+    .opcoes{
+        margin-right: 5px;
+    }
+    .central{
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+<html lang="pt-br">
     <head>        
+        <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+        <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <form method="post">            
-            <input type="text" id="palavra" placeholder="Palavra" name="palavra">
-            <input type="submit" id="enviar_btn" value="Enviar">
-          </form>
+    <body>  
+        
+        <div class="modal fade" id="dicionarioModal" tabindex="-1" aria-labelledby="dicionarioModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dicionarioModalLabel">Dicionário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <small class="label">ABRIR</small><small> / </small>
+                        <small class="label">FECHAR</small>                    
+                    </div>                
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="infosModal" tabindex="-1" aria-labelledby="infosModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infosModalLabel">Sobre</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">                    
+                  
+                    </div>                
+              </div>
+            </div>
+        </div>
+        
+        <div class="container principal">                        
+            <div class="row">                
+                <div class="col-12">                    
+                    <img class="hand" src="../static/inmoov-hand.png">
+                </div>            
+            </div>                        
+            <div class="row">
+                <div class="col-md-12">  
+                                    
+                    <form method="post">                        
+                        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                            <div class="input-group">
+                                <input type="text" id="palavra" name="palavra" placeholder="Digite algo em português" 
+                                    aria-describedby="button-addon1" class="form-control form-control-lg border-0 bg-light">
+                                <div class="input-group-append">
+                                    <button type="submit" id="enviar_btn" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                          </div>
+                    </form>                    
+                </div>
+                <div class="col-md-12 center-block text-center">                    
+                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#dicionarioModal"><i class="fa fa-book opcoes" aria-hidden="true"></i>Dicionário</button>
+                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#infosModal"><i class="fa fa-question-circle opcoes" aria-hidden="true"></i>Sobre</button>
+                </div>
+            </div>               
+        
+            {% if error %}
+            <div class="row">
+                <div class="col-md-12" style="position: relative;">     
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta">
+                        Não foi possível representar todas as palavras em LIBRAS. Veja aqui a lista de <a href="#" class="alert-link">palavras disponíveis</a>.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="container" >
+            <div class="row" id="footer">
+                <div class="col-md-12">     
+                    <img class="logos" src="../static/utfpr-logo.png">
+                </div>
+            </div> 
+        </div>    
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>
+
+
+<script type="text/javascript"> 
+    var dicionario = "{{words|safe}}";
+    
+    console.log(dicionario)
+ </script>

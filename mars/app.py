@@ -5,15 +5,18 @@ from dictionary import *
 
 app = Flask(__name__)
 
-nome = Sinal()
+sinal = Sinal()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    error = None
+
     if request.method == 'POST':                   
         
-        #nome.rola(request.form['palavra'])
-        nome.rola(words["rola"])
-    return render_template ('index.html')
+        #sinal.rola(request.form['palavra'])
+        error = True
+        sinal.rola(words["rola"])
+    return render_template('index.html', error = error, words = list(words.keys()))
 
 def main():
     logging.basicConfig(level=logging.CRITICAL)
