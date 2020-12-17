@@ -1,6 +1,6 @@
 <!doctype html>
 <style>   
-    #alerta{
+    .alerta{
         
         display: block;
         margin: auto;
@@ -41,6 +41,10 @@
             font-size: 16px;
         }
     }
+    
+    .botoes{
+        margin: auto 5px;
+    }    
     .opcoes{
         margin-right: 5px;
     }
@@ -59,7 +63,7 @@
     <body>  
         
         <div class="modal fade" id="dicionarioModal" tabindex="-1" aria-labelledby="dicionarioModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="dicionarioModalLabel">Dicionário</h5>
@@ -68,8 +72,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <small class="label">ABRIR</small><small> / </small>
-                        <small class="label">FECHAR</small>                    
+                        {% for item in dictionary %}
+                            <small class="label">[ {% print(item.upper()) %} ] </small>
+                        {% endfor %}                 
                     </div>                
                 </div>
             </div>
@@ -79,7 +84,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="infosModalLabel">Sobre</h5>
+                        <h5 class="modal-title" id="infosModalLabel">Ajuda</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -113,22 +118,35 @@
                     </form>                    
                 </div>
                 <div class="col-md-12 center-block text-center">                    
-                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#dicionarioModal"><i class="fa fa-book opcoes" aria-hidden="true"></i>Dicionário</button>
-                    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#infosModal"><i class="fa fa-question-circle opcoes" aria-hidden="true"></i>Sobre</button>
+                    <button type="button" class="btn btn-dark botoes" data-toggle="modal" data-target="#dicionarioModal"><i class="fa fa-book opcoes" aria-hidden="true"></i>Dicionário</button>
+                    <button type="button" class="btn btn-dark botoes" data-toggle="modal" data-target="#infosModal"><i class="fa fa-question-circle opcoes" aria-hidden="true"></i>Ajuda</button>
                 </div>
             </div>               
         
-            {% if error %}
+            {% if error == True %}
             <div class="row">
                 <div class="col-md-12" style="position: relative;">     
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alerta">
-                        Não foi possível representar todas as palavras em LIBRAS. Veja aqui a lista de <a href="#" class="alert-link">palavras disponíveis</a>.
+                    <div class="alert alert-warning alert-dismissible fade show alerta" role="alert" id="">
+                        Não foi possível representar a(s) palavra(s):
+                        {% print(' / '.join(erros)) %}                
+                        em LIBRAS. Veja aqui a lista de <a href="#" class="alert-link">palavras disponíveis</a>.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 </div>
             </div>
+            {% elif error == False %}
+                <div class="row">
+                    <div class="col-md-12" style="position: relative;">     
+                        <div class="alert alert-success alert-dismissible fade show alerta" role="alert">
+                            Todas as palavras digitadas puderam ser representadas em LIBRAS. 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
         <div class="container" >
@@ -147,7 +165,6 @@
 
 
 <script type="text/javascript"> 
-    var dicionario = "{{words|safe}}";
-    
+    var dicionario = "{{dictionary|safe}}";    
     console.log(dicionario)
  </script>

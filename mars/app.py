@@ -1,22 +1,33 @@
 from flask import Flask, render_template, request
 import logging
-from signal import Sinal
+#from signal import Sinal
 from dictionary import *
+import re
+from processing import Processing
 
 app = Flask(__name__)
 
-sinal = Sinal()
+#sinal = Sinal()
+processing = Processing()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
+    erros = []
+    words = []
+    if request.method == 'POST':                           
+        palavras = re.sub(r"[^a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ \[\]]+", ' ', request.form['palavra']).split()
 
-    if request.method == 'POST':                   
+        words = palavras
+
+        processing.separarPalavras(palavras)
         
-        #sinal.rola(request.form['palavra'])
-        error = True
-        sinal.rola(words["rola"])
-    return render_template('index.html', error = error, words = list(words.keys()))
+        error = False
+        error = processing.conferirDicionario(palavras, error, erros)
+        print (error)
+        
+        
+    return render_template('index.html', dictionary = list(dictionary.keys()), error = error, erros = erros)
 
 def main():
     logging.basicConfig(level=logging.CRITICAL)
