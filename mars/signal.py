@@ -38,6 +38,7 @@ class Sinal:
 
 
     def fingerMovement(self, angle, finger):
+        print("Angulo: ", angle, " Dedo: ", finger)
         duty = float(angle) / 10.0 + 2.5
         self.pwm[finger].ChangeDutyCycle(duty)
 
@@ -61,3 +62,15 @@ class Sinal:
         GPIO.setup(finger5, GPIO.OUT)
         self.pwm[4] = GPIO.PWM(finger5, 100)
         self.pwm[4].start(5)
+
+def main():
+    mao = Sinal()
+    while True:
+        print("Digite o angulo: ")
+        angulo = input();
+        print("Digite o dedo: ")
+        dedo = input();
+        mao.finger(angulo, dedo)
+
+if __name__ == "__main__":
+	main()
