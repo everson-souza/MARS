@@ -1,4 +1,3 @@
-<!doctype html>
 <style>   
     .alerta{
         
@@ -6,18 +5,23 @@
         margin: auto;
         z-index: 1;
         margin-top: 15px;
-        font-size: 12px;
+        font-size: 14px;
     }
     .close{
         font-size: 18px !important;
     }
     .hand {
         display: block;
-        margin: 50px auto;
+        margin: 50px auto 10px auto;
         max-width: 350px;
     }
+    .titulo{
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
     .logos{
-        max-width: 100px;
+        max-width: 150px;
     }
     #footer {
         position: absolute;
@@ -52,17 +56,22 @@
         display: block;
         margin: 0 auto;
     }
+    .label-input{
+        margin: 9px;
+        color: #495057;
+        font-size: 20px;
+    }
 </style>
 
 <html lang="pt-br">
-    <head>        
-        <meta name = "viewport" content = "width=device-width, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+    <head>                
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
         <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
+        <title>Mão Robótica Representativa de Sinais para Auxiliar no aprendizado de LIBRAS</title>
     </head>
     <body>  
         
-        <div class="modal fade" id="dicionarioModal" tabindex="-1" aria-labelledby="dicionarioModalLabel" aria-hidden="true">
+        <div role="dicionario" class="modal fade" id="dicionarioModal" tabindex="-1" aria-labelledby="dicionarioModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,7 +89,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="infosModal" tabindex="-1" aria-labelledby="infosModalLabel" aria-hidden="true">
+        <div role="sobre" class="modal fade" id="infosModal" tabindex="-1" aria-labelledby="infosModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -96,30 +105,33 @@
             </div>
         </div>
         
-        <div class="container principal">                        
+        <div class="container principal" role="main">                        
             <div class="row">                
                 <div class="col-12">                    
-                    <img class="hand" src="../static/inmoov-hand.png">
+                    <img alt="Logo MARS" class="hand" src="../static/inmoov-hand.png">
+                    <h1 class="titulo">Mão Robótica Representativa de Sinais</h1>
                 </div>            
             </div>                        
             <div class="row">
                 <div class="col-md-12">  
                                     
-                    <form method="post">                        
+                    <form method="post">                                     
                         <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
                             <div class="input-group">
-                                <input type="text" id="palavra" name="palavra" placeholder="Digite algo em português" 
-                                    aria-describedby="button-addon1" class="form-control form-control-lg border-0 bg-light">
+                                <label for="palavra" class="label-input">Digite algo em português: </label>   
+                                <input type="text" id="palavra" name="palavra"
+                                aria-labelledby="Entrada de letras e palavras em português" aria-hidden="false" aria-describedby="Entrada de letras e palavras em português" class="form-control form-control-lg border-0 bg-light">                                
                                 <div class="input-group-append">
-                                    <button type="submit" id="enviar_btn" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                                    <button aria-label="Enviar" type="submit" id="enviar_btn" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                           </div>
+                          
                     </form>                    
                 </div>
                 <div class="col-md-12 center-block text-center">                    
-                    <button type="button" class="btn btn-dark botoes" data-toggle="modal" data-target="#dicionarioModal"><i class="fa fa-book opcoes" aria-hidden="true"></i>Dicionário</button>
-                    <button type="button" class="btn btn-dark botoes" data-toggle="modal" data-target="#infosModal"><i class="fa fa-question-circle opcoes" aria-hidden="true"></i>Ajuda</button>
+                    <button type="button" aria-label="Botão Dicionario" class="btn btn-dark botoes" data-toggle="modal" data-target="#dicionarioModal"><i class="fa fa-book opcoes" aria-hidden="true"></i>Dicionário</button>
+                    <button type="button" aria-label="Botão Sobre" class="btn btn-dark botoes" data-toggle="modal" data-target="#infosModal"><i class="fa fa-question-circle opcoes" aria-hidden="true"></i>Ajuda</button>
                 </div>
             </div>               
         
@@ -149,10 +161,10 @@
                 </div>
             {% endif %}
         </div>
-        <div class="container" >
+        <div class="container" role="contentinfo">
             <div class="row" id="footer">
                 <div class="col-md-12">     
-                    <img class="logos" src="../static/utfpr-logo.png">
+                    <img alt="Logo UTFPR" class="logos" src="../static/utfpr-logo.png">
                 </div>
             </div> 
         </div>    
