@@ -19,7 +19,7 @@ class MaoRobotica:
         self.iniciarMao()
     
     def representarSinal(self, parametrosSinal):
-        self.abriMao()
+        self.abrirMao()
         time.sleep(1)
         
         for parametros in parametrosSinal:
@@ -105,7 +105,7 @@ class MaoRobotica:
 def main():
     mao = MaoRobotica()
     print("Iniciando a MAR2S!!!")
-    mao.openHand()
+    mao.abrirMao()
 
     while True:
         op = input("1- Digitar algo\n2- Entrada manual dos angulos\n")
