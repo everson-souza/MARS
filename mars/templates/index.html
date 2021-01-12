@@ -81,7 +81,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {% for item in dictionary %}
+                        {% for item in dicionario %}
                             <small class="label">[ {% print(item.upper()) %} ] </small>
                         {% endfor %}                 
                     </div>                
@@ -135,20 +135,20 @@
                 </div>
             </div>               
         
-            {% if error == True %}
+            {% if erro == True %}
             <div class="row">
                 <div class="col-md-12" style="position: relative;">     
                     <div class="alert alert-warning alert-dismissible fade show alerta" role="alert" id="">
                         Não foi possível representar a(s) palavra(s):
-                        {% print(' / '.join(erros)) %}                
-                        em LIBRAS. Veja aqui a lista de <a href="#" class="alert-link">palavras disponíveis</a>.
+                        <span class="alert-link">{% print(' / '.join(erros)) %}</span>
+                        em LIBRAS..
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 </div>
             </div>
-            {% elif error == False %}
+            {% elif erro == False %}
                 <div class="row">
                     <div class="col-md-12" style="position: relative;">     
                         <div class="alert alert-success alert-dismissible fade show alerta" role="alert">

@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import re
-from dictionary import *
+from dicionario import *
 
 # Classe onde será implementado a movimentação dos motores
-class Processing:
+class Processamento:
     
     def __init__(self):        
         print ('lalala')
@@ -17,9 +19,9 @@ class Processing:
                     j+=1
                 palavras.remove(palavras[i])
 
-    def conferirDicionario(self, palavras, error, erros):    
+    def conferirDicionario(self, palavras, erro, erros):    
         for p in palavras:
-            if p not in list(dictionary.keys()):
-                error = True
+            if p not in list(dicionario.keys()):
+                erro = True
                 erros.append(p)
-        return error
+        return erro

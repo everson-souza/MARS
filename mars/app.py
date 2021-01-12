@@ -1,38 +1,45 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template, request
 import logging
-#from signal import Sinal
-from dictionary import *
+from maorobotica import MaoRobotica
+from dicionario import *
 import re
-from processing import Processing
+from processamento import Processamento
 
 app = Flask(__name__)
 
 #sinal = Sinal()
-processing = Processing()
+processamento = Processamento()
+maorobotica = MaoRobotica()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    error = None
+    erro = None
     erros = []
     words = []
     if request.method == 'POST':                           
         palavras = re.sub(r"[^a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ \[\]]+", ' ', request.form['palavra']).split()
+        palavras = ([p.lower() for p in palavras])
+        
+        processamento.separarPalavras(palavras)
 
-        words = palavras
-
-        processing.separarPalavras(palavras)
+        erro = False
+        erro = processamento.conferirDicionario(palavras, erro, erros)
+        if not erro:
+            for p in palavras:
+                terminou = False
+                terminou = maorobotica.representarSinal(dicionario[p])
+                print(p)
+                print(terminou)
         
-        error = False
-        error = processing.conferirDicionario(palavras, error, erros)
-        print (error)
         
-        
-    return render_template('index.html', dictionary = list(dictionary.keys()), error = error, erros = erros)
+    return render_template('index.html', dicionario = list(dicionario.keys()), erro = erro, erros = erros)
 
 def main():
     logging.basicConfig(level=logging.CRITICAL)
     app.logger.disable = True
-    app.run(host='192.168.100.84', port = 443, debug=False)
+    app.run(host='192.168.100.51', port = 8080, debug=False)
 
 if __name__ == "__main__":
     main()
