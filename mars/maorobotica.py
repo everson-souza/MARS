@@ -17,6 +17,7 @@ class MaoRobotica:
     def __init__(self):
         self.pwmServos = [0]*5
         self.iniciarMao()
+        self.abrirMao()
     
     def representarSinal(self, parametrosSinal):
         self.abrirMao()
@@ -41,7 +42,6 @@ class MaoRobotica:
 
             time.sleep(parametros[5])
 
-        time.sleep(2)
         return True
 
     def fecharMao(self):
@@ -108,20 +108,12 @@ def main():
     mao.abrirMao()
 
     while True:
-        op = input("1- Digitar algo\n2- Entrada manual dos angulos\n")
-        opcao = int(op)
-        if(opcao == 1):
-            palavra = input("Digite algo: ")
-            print("Palavra:", palavra, type(palavra))
-            mao.representarSinal(dicionario[palavra])
-            continue
-        if(opcao == 2):
-            print("Digite o angulo: ")
-            angulo = input();
-            print("Digite o dedo: ")
-            dedo = input();
-            mao.movimentoDedo(int(angulo), int(dedo))
-            continue
+        print("Digite o angulo: ")
+        angulo = input();
+        print("Digite o dedo: ")
+        dedo = input();
+        mao.movimentoDedo(int(angulo), int(dedo))
+        continue
 
 if __name__ == "__main__":
 	main()
