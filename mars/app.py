@@ -6,6 +6,7 @@ from maorobotica import MaoRobotica
 from dicionario import *
 import re
 from processamento import Processamento
+import unicodedata
 
 app = Flask(__name__)
 
@@ -17,9 +18,19 @@ maorobotica = MaoRobotica()
 def index():
     erro = None
     erros = []
-    words = []
+    palavras = []
+
+    dicLetras = []
+    dicNumeros = []
+    dicPalavras = []
+    dicExpressoes = []
+
+    processamento.montarDicionario(dicLetras, dicNumeros, dicPalavras, dicExpressoes)
+
     if request.method == 'POST':                           
-        palavras = re.sub(r"[^a-zA-ZzáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ \[\]]+", ' ', request.form['palavra']).split()
+        entrada = processamento.processaEntrada(request.form['palavra'])
+        
+        palavras = entrada.split()
         palavras = ([p.lower() for p in palavras])
         
         processamento.separarPalavras(palavras)
@@ -30,11 +41,10 @@ def index():
             for p in palavras:
                 terminou = False
                 terminou = maorobotica.representarSinal(dicionario[p])
-                print(p)
-                print(terminou)
+                print(p)                
         
         
-    return render_template('index.html', dicionario = list(dicionario.keys()), erro = erro, erros = erros)
+    return render_template('index.html', letras = dicLetras, numeros = dicNumeros, palavras = dicPalavras, expressoes = dicExpressoes, erro = erro, erros = erros)
 
 def main():
     logging.basicConfig(level=logging.CRITICAL)

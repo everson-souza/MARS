@@ -61,6 +61,21 @@
         color: #495057;
         font-size: 20px;
     }
+    .subtitulo {
+        font-size: 16px;
+        font-style: bold;
+    }
+
+    .texto-ajuda{
+        font-size: 14px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+    }
+
+    .subtexto-ajuda{
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
 </style>
 
 <html lang="pt-br">
@@ -80,10 +95,26 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        {% for item in dicionario %}
+                    <div class="modal-body">                                            
+                        <small class="label"><b>Letras:</b></small>
+                        {% for item in letras %}
+                            <small class="label">[ {% print(item.upper()) %} ] </small>
+                        {% endfor %}        
+                        <hr>         
+                        <small class="label"><b>Números:</b></small>
+                        {% for item in numeros %}
                             <small class="label">[ {% print(item.upper()) %} ] </small>
                         {% endfor %}                 
+                        <hr> 
+                        <small class="label"><b>Palavras:</b></small>
+                        {% for item in palavras %}
+                            <small class="label">[ {% print(item.upper()) %} ] </small>
+                        {% endfor %}                 
+                        <hr> 
+                        <small class="label"><b>Expressões:</b></small>
+                        {% for item in expressoes %}
+                            <small class="label">[ {% print(item.upper()) %} ] </small>
+                        {% endfor %}                                         
                     </div>                
                 </div>
             </div>
@@ -99,7 +130,13 @@
                         </button>
                     </div>
                     <div class="modal-body">                    
-                  
+                        <p class="texto-ajuda">A <b>MAR<sup>2</sup>S</b> é uma mão robótica capaz de gesticular sinais em <b>LIBRAS</b> a partir do que foi escrito em <b>português</b>.</p>
+                        <hr>
+                        <p class="texto-ajuda">Nela você pode escrever letras, números, palavras e expressões em português para serem representadas em <b>LIBRAS</b> pela <b>MAR<sup>2</sup>S</b>. </p>
+                        <p class="subtexto-ajuda">* Você pode conferir quais sinais a mão é capaz de reproduzir clicando em <b>Dicionário</b> na tela principal.</p>
+                        <p class="texto-ajuda">Para soletrar uma palavra, você pode colocá-la entre [ ]. Assim, os sinais são representados letra por letra.</p>
+                        <p class="subtexto-ajuda">* Ex: [ata], os sinais representados serão os sinais correspondentes as letras A, T e A.</p>
+                        <p class="subtexto-ajuda">** Não devem ser adicionados espaços em palavras a serem soletradas</p>
                     </div>                
               </div>
             </div>
@@ -139,9 +176,9 @@
             <div class="row">
                 <div class="col-md-12" style="position: relative;">     
                     <div class="alert alert-warning alert-dismissible fade show alerta" role="alert" id="">
-                        Não foi possível representar a(s) palavra(s):
+                        Infelizmente, a MAR<sup>2</sup>S ainda não é capaz de representar os sinais correspondentes a:
                         <span class="alert-link">{% print(' / '.join(erros)) %}</span>
-                        em LIBRAS..
+                        
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -152,7 +189,7 @@
                 <div class="row">
                     <div class="col-md-12" style="position: relative;">     
                         <div class="alert alert-success alert-dismissible fade show alerta" role="alert">
-                            Todas as palavras digitadas puderam ser representadas em LIBRAS. 
+                            Todas os sinais puderam ser representados em LIBRAS pela MAR<sup>2</sup>S. 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -177,6 +214,13 @@
 
 
 <script type="text/javascript"> 
-    var dicionario = "{{dictionary|safe}}";    
-    console.log(dicionario)
+    var letras = "{{letras|safe}}";    
+    var numeros = "{{numeros|safe}}";    
+    var palavras = "{{palavras|safe}}";    
+    var expressoes = "{{expressoes|safe}}";    
+
+    console.log(letras);
+    console.log(numeros);
+    console.log(palavras);
+    console.log(expressoes);
  </script>
