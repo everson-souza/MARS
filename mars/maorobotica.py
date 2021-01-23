@@ -24,23 +24,24 @@ class MaoRobotica:
         time.sleep(1)
         
         for parametros in parametrosSinal:
-            # print("Angles:", angles, type(angles))
-            d1 = threading.Thread(target=self.movimentoDedo, args=(parametros[0], 0))
-            d1.start()
+            if type(parametros) != type(1):
+                # print("Angles:", angles, type(angles))
+                d1 = threading.Thread(target=self.movimentoDedo, args=(parametros[0], 0))
+                d1.start()
 
-            d2 = threading.Thread(target=self.movimentoDedo, args=(parametros[1], 1))
-            d2.start()
+                d2 = threading.Thread(target=self.movimentoDedo, args=(parametros[1], 1))
+                d2.start()
 
-            d3 = threading.Thread(target=self.movimentoDedo, args=(parametros[2], 2))
-            d3.start()
+                d3 = threading.Thread(target=self.movimentoDedo, args=(parametros[2], 2))
+                d3.start()
 
-            d4 = threading.Thread(target=self.movimentoDedo, args=(parametros[3], 3))
-            d4.start()
+                d4 = threading.Thread(target=self.movimentoDedo, args=(parametros[3], 3))
+                d4.start()
 
-            d5 = threading.Thread(target=self.movimentoDedo, args=(parametros[4], 4))
-            d5.start()
+                d5 = threading.Thread(target=self.movimentoDedo, args=(parametros[4], 4))
+                d5.start()
 
-            time.sleep(parametros[5])
+                time.sleep(parametros[5])
 
         return True
 
