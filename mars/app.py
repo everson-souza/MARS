@@ -10,7 +10,6 @@ import unicodedata
 
 app = Flask(__name__)
 
-#sinal = Sinal()
 processamento = Processamento()
 maorobotica = MaoRobotica()
 
@@ -49,7 +48,7 @@ def index():
 def main():
     logging.basicConfig(level=logging.CRITICAL)
     app.logger.disable = True
-    app.run(host='192.168.100.84', port = 443, debug=False)
+    app.run(host='192.168.15.200', port =8080, debug=False)
 
 if __name__ == "__main__":
     main()
