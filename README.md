@@ -2,8 +2,8 @@ The Brazilian Sign Language (LIBRAS) is the second official Brazilian language a
 signs that the hand is able to reproduce. Finally, the hand worked as expected and shows itself as an interesting possibility to stimulate the introductory teaching of LIBRAS.
 
 <span style="display:block;text-align:center">
-<img src="https://user-images.githubusercontent.com/16108368/112045693-e792a700-8b29-11eb-8b82-0b0a13c39bd8.jpeg" alt="'Bom dia' handshape" height="250">
-<img src="https://user-images.githubusercontent.com/16108368/112045699-e8c3d400-8b29-11eb-8b6a-4a7c91a41e5d.JPG" alt="Open hand" height="250">
-<img src="https://user-images.githubusercontent.com/16108368/112046871-51f81700-8b2b-11eb-8c69-5a48e58509b8.png" alt="Graphic interface" height="250">
+<img src="https://user-images.githubusercontent.com/16108368/112045693-e792a700-8b29-11eb-8b82-0b0a13c39bd8.jpeg" alt="'Bom dia' handshape" height="200">
+<img src="https://user-images.githubusercontent.com/16108368/112045699-e8c3d400-8b29-11eb-8b6a-4a7c91a41e5d.JPG" alt="Open hand" height="200">
+<img src="https://user-images.githubusercontent.com/16108368/112046871-51f81700-8b2b-11eb-8c69-5a48e58509b8.png" alt="Graphic interface" height="200">
 
 </span>
